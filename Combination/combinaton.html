@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกรายรับรายจ่าย และ ประเมินความเสี่ยงการลงทุน</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="combinaton.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- ประเมินความเสี่ยงการลงทุน -->
+        <h1 class="text-center mb-4">แบบประเมินความเสี่ยงการลงทุน</h1>
+        <form id="risk-assessment-form" class="needs-validation mb-4" novalidate>
+            <h2 class="mb-4">กรุณาตอบคำถามต่อไปนี้:</h2>
+
+            <!-- คำถามที่ 1 -->
+            <div class="mb-3">
+                <label for="question1" class="form-label">1. คุณมีประสบการณ์ในการลงทุนมาก่อนหรือไม่?</label>
+                <select id="question1" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มี</option>
+                    <option value="low">มีประสบการณ์น้อย</option>
+                    <option value="medium">มีประสบการณ์ปานกลาง</option>
+                    <option value="high">มีประสบการณ์มาก</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 2 -->
+            <div class="mb-3">
+                <label for="question2" class="form-label">2. คุณมีความรู้เกี่ยวกับการลงทุนในสินทรัพย์ประเภทต่าง ๆ
+                    มากน้อยเพียงใด?</label>
+                <select id="question2" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มีความรู้</option>
+                    <option value="basic">รู้จักแต่พื้นฐาน</option>
+                    <option value="good">รู้จักดีพอสมควร</option>
+                    <option value="deep">มีความรู้เชิงลึก</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 3 -->
+            <div class="mb-3">
+                <label for="question3" class="form-label">3. คุณมีเป้าหมายการลงทุนที่ชัดเจนหรือไม่?</label>
+                <select id="question3" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มี</option>
+                    <option value="unclear">มีแต่ไม่ชัดเจน</option>
+                    <option value="clear">มีเป้าหมายที่ชัดเจน</option>
+                    <option value="clear_plan">มีเป้าหมายที่ชัดเจนและแผนการดำเนินการ</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 4 -->
+            <div class="mb-3">
+                <label for="question4" class="form-label">4. คุณสามารถรับความเสี่ยงจากการลงทุนได้มากน้อยเพียงใด?</label>
+                <select id="question4" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่สามารถรับความเสี่ยงได้</option>
+                    <option value="low">รับความเสี่ยงได้น้อย</option>
+                    <option value="medium">รับความเสี่ยงได้ปานกลาง</option>
+                    <option value="high">รับความเสี่ยงได้สูง</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 5 -->
+            <div class="mb-3">
+                <label for="question5" class="form-label">5. คุณมีระยะเวลาการลงทุนที่ยาวนานหรือไม่?</label>
+                <select id="question5" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="no">ไม่</option>
+                    <option value="short">มีระยะเวลาสั้น</option>
+                    <option value="medium">มีระยะเวลาปานกลาง</option>
+                    <option value="long">มีระยะเวลานาน</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 6 -->
+            <div class="mb-3">
+                <label for="question6" class="form-label">6. คุณมีการลงทุนในหลายประเภทสินทรัพย์หรือไม่?</label>
+                <select id="question6" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มี</option>
+                    <option value="single">มีการลงทุนในสินทรัพย์ประเภทเดียว</option>
+                    <option value="multiple">มีการลงทุนในสินทรัพย์หลายประเภท</option>
+                    <option value="diversified">มีการลงทุนในสินทรัพย์หลายประเภทและกระจายความเสี่ยง</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 7 -->
+            <div class="mb-3">
+                <label for="question7" class="form-label">7.
+                    คุณมีการสำรองเงินฉุกเฉินสำหรับกรณีที่เกิดความเสี่ยงทางการเงินหรือไม่?</label>
+                <select id="question7" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มี</option>
+                    <option value="little">มีเพียงเล็กน้อย</option>
+                    <option value="sufficient">มีพอสมควร</option>
+                    <option value="ample">มีสำรองเงินฉุกเฉินมาก</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 8 -->
+            <div class="mb-3">
+                <label for="question8" class="form-label">8.
+                    คุณมีความรู้เกี่ยวกับความผันผวนของตลาดการลงทุนมากน้อยเพียงใด?</label>
+                <select id="question8" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มีความรู้</option>
+                    <option value="basic">รู้จักแต่พื้นฐาน</option>
+                    <option value="good">รู้จักดีพอสมควร</option>
+                    <option value="deep">มีความรู้เชิงลึก</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 9 -->
+            <div class="mb-3">
+                <label for="question9" class="form-label">9. คุณเคยประสบกับความเสียหายจากการลงทุนในอดีตหรือไม่?</label>
+                <select id="question9" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="high">เคยประสบความเสียหายมาก</option>
+                    <option value="low">เคยประสบความเสียหายเล็กน้อย</option>
+                    <option value="none">ไม่เคยประสบความเสียหาย</option>
+                    <option value="unsure">ไม่แน่ใจ</option>
+                </select>
+            </div>
+
+            <!-- คำถามที่ 10 -->
+            <div class="mb-3">
+                <label for="question10" class="form-label">10.
+                    คุณมีการติดตามและวิเคราะห์ผลการลงทุนอย่างสม่ำเสมอหรือไม่?</label>
+                <select id="question10" class="form-select" required>
+                    <option value="" disabled selected>เลือกคำตอบ</option>
+                    <option value="none">ไม่มี</option>
+                    <option value="sometimes">บางครั้ง</option>
+                    <option value="regular">สม่ำเสมอ</option>
+                    <option value="detailed">สม่ำเสมอและละเอียด</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ประเมินความเสี่ยง</button>
+        </form>
+
+        <!-- กราฟแสดงผลการประเมินความเสี่ยง -->
+        <div class="mt-4">
+            <canvas id="risk-chart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- แสดงคำแนะนำการลงทุน -->
+        <div id="investment-advice" class="mt-4 alert alert-info" role="alert">
+            คำแนะนำการลงทุนจะปรากฏที่นี่
+        </div>
+
+        <h1 class="text-center mb-4 mt-5">ระบบบันทึกรายรับรายจ่าย</h1>
+
+        <!-- ฟอร์มตั้งค่ายอดเงินตั้งต้น -->
+        <form id="initial-balance-form" class="mb-4">
+            <input type="number" id="initial-balance" class="form-control mb-2" placeholder="ยอดเงินตั้งต้น" required>
+            <button type="submit" class="btn btn-primary">ตั้งค่า</button>
+        </form>
+
+        <!-- ฟอร์มบันทึกรายรับรายจ่าย -->
+        <!-- HTML for the transaction form -->
+        <form id="transaction-form">
+            <input type="text" id="description" placeholder="คำอธิบาย" required />
+            <input type="number" id="amount" placeholder="จำนวนเงิน" required />
+            <select id="category">
+                <option value="food">อาหาร</option>
+                <option value="housing">ที่อยู่อาศัย</option>
+                <option value="transportation">การเดินทาง</option>
+            </select>
+            <button type="submit">บันทึก</button>
+            <button type="button" id="cancel-button">ยกเลิก</button>
+        </form>
+
+
+        <!-- ปุ่มสำหรับดาวน์โหลดข้อมูลเป็น Excel -->
+        <button id="export-button" class="btn btn-success mb-4">ดาวน์โหลดข้อมูลเป็น Excel</button>
+
+        <!-- แสดงยอดคงเหลือ -->
+        <div id="balance" class="mb-4">ยอดคงเหลือ: 0 บาท</div>
+
+        <!-- แสดงรายการใช้จ่าย -->
+        <ul id="transaction-list" class="list-group mb-4"></ul>
+
+        <!-- กราฟสำหรับแสดงข้อมูลการใช้จ่าย -->
+        <canvas id="expenses-chart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="combinaton.js"></script>
+</body>
+
+</html>

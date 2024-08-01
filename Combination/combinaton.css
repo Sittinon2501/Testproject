@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#balance {
+    font-size: 18px;
+    text-align: center;
+}
+
+#transaction-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#transaction-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+#investment-advice {
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#investment-advice.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}

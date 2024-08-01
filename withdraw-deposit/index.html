@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกรายรับรายจ่าย</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>ระบบบันทึกรายรับรายจ่าย</h1>
+        
+        <!-- ฟอร์มตั้งค่ายอดเงินตั้งต้น -->
+        <form id="initial-balance-form">
+            <input type="number" id="initial-balance" placeholder="ยอดเงินตั้งต้น" required>
+            <button type="submit">ตั้งค่า</button>
+        </form>
+        
+        <!-- ฟอร์มบันทึกรายรับรายจ่าย -->
+        <form id="transaction-form">
+            <input type="text" id="description" placeholder="รายละเอียด" required>
+            <input type="number" id="amount" placeholder="จำนวนเงิน" required>
+            <select id="category">
+                <option value="food">อาหาร</option>
+                <option value="housing">ที่อยู่อาศัย</option>
+                <option value="transportation">การเดินทาง</option>
+            </select>
+            <button type="submit">บันทึก</button>
+        </form>
+
+        <!-- ปุ่มสำหรับดาวน์โหลดข้อมูลเป็น Excel -->
+        <button id="export-button">ดาวน์โหลดข้อมูลเป็น Excel</button>
+
+        <!-- แสดงยอดคงเหลือ -->
+        <div id="balance">ยอดคงเหลือ: 0 บาท</div>
+
+        <!-- แสดงรายการใช้จ่าย -->
+        <ul id="transaction-list"></ul>
+
+        <!-- กราฟสำหรับแสดงข้อมูลการใช้จ่าย -->
+        <canvas id="expenses-chart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

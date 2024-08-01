@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประเมินความเสี่ยงการลงทุน</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="risk.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">แบบประเมินความเสี่ยงการลงทุน</h1>
+        
+        <!-- ฟอร์มประเมินความเสี่ยง -->
+        <form id="risk-assessment-form" class="needs-validation" novalidate>
+            <h2 class="mb-4">กรุณาตอบคำถามต่อไปนี้:</h2>
+            <div class="mb-3">
+                <label for="q1" class="form-label">1. คุณมีประสบการณ์ในการลงทุนมากน้อยเพียงใด?</label>
+                <select id="q1" name="q1" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q2" class="form-label">2. คุณสามารถรับความเสี่ยงในการลงทุนได้มากน้อยเพียงใด?</label>
+                <select id="q2" name="q2" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q3" class="form-label">3. คุณมีความรู้เกี่ยวกับตลาดการเงินมากน้อยเพียงใด?</label>
+                <select id="q3" name="q3" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q4" class="form-label">4. คุณมีความสามารถในการจัดการกับการสูญเสียทางการเงินได้มากน้อยเพียงใด?</label>
+                <select id="q4" name="q4" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q5" class="form-label">5. คุณมีแหล่งรายได้หลายช่องทางหรือไม่?</label>
+                <select id="q5" name="q5" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q6" class="form-label">6. คุณมีแผนการลงทุนที่ชัดเจนและเป็นระเบียบหรือไม่?</label>
+                <select id="q6" name="q6" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q7" class="form-label">7. คุณสามารถทนต่อความผันผวนของตลาดได้มากน้อยเพียงใด?</label>
+                <select id="q7" name="q7" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q8" class="form-label">8. คุณมีการติดตามผลการลงทุนและการปรับกลยุทธ์อยู่เสมอหรือไม่?</label>
+                <select id="q8" name="q8" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q9" class="form-label">9. คุณมีความรู้เกี่ยวกับเครื่องมือทางการเงินต่าง ๆ หรือไม่?</label>
+                <select id="q9" name="q9" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <div class="mb-3">
+                <label for="q10" class="form-label">10. คุณคาดหวังผลตอบแทนจากการลงทุนอย่างไร?</label>
+                <select id="q10" name="q10" class="form-select" required>
+                    <option value="" disabled selected>เลือกคะแนน</option>
+                    <option value="1">1 - น้อยที่สุด</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 - มากที่สุด</option>
+                </select>
+                <div class="invalid-feedback">กรุณาเลือกคะแนนที่ถูกต้อง</div>
+            </div>
+            <button type="submit" class="btn btn-primary">ประเมินความเสี่ยง</button>
+        </form>
+
+        <!-- กราฟแสดงผลการประเมินความเสี่ยง -->
+        <div class="mt-4">
+            <canvas id="risk-chart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- แสดงคำแนะนำการลงทุน -->
+        <div id="investment-advice" class="mt-4 alert alert-info" role="alert">
+            คำแนะนำการลงทุนจะปรากฏที่นี่
+        </div>
+
+        <!-- ปุ่มสำหรับดาวน์โหลดข้อมูลเป็น Excel -->
+        <button id="export-button" class="btn btn-success mt-3">ดาวน์โหลดข้อมูลเป็น Excel</button>
+    </div>
+
+    <script src="risk.js"></script>
+</body>
+</html>
